@@ -1,0 +1,70 @@
+﻿@model SV19T1021021.Web.Models.CategoryPaginationResult
+@{
+    Layout = null;
+}
+
+<p>
+    Có tổng cộng <b>@Model.RowCount</b> trong tổng số <b>@Model.PageCount</b> trang.
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="bg-primary">
+                <td style="width:70px">STT</td>
+                <th>Tên loại hàng</th>
+                <th>Mô tả</th>
+                <th>Danh mục cha</th>
+                <th style="width:120px">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>@item.CategoryId</td>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Description</td>
+                    <td>-</td>
+                    <td class="text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+                                <i class="fa fa-bars"></i>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/product?categoryID=@item.CategoryId">Đi đến mặt hàng</a></li>
+
+                            </ul>
+                        </div>
+                        <a href="~/category/edit/@item.CategoryId" class="btn-xs btn-success" style="margin:1px">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="~/category/delete/@item.CategoryId" class="btn-xs btn-warning" style="margin:1px">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center">
+    <ul class="pagination">
+        <li><a href="#"><i class="fa fa-backward"></i></a></li>
+        @for (var i = 1; i <= Model.PageCount; ++i)
+        {
+            if (i == Model.Page)
+            {
+                <li class="active">
+                    <a>@i</a>
+                </li>
+            }
+            else
+            {
+                <li><a href="javascript:;" onclick="doSearch(@i)">@i</a></li>
+            }
+        }
+        <li><a href="#"><i class="fa fa-forward"></i></a></li>
+    </ul>
+</div>

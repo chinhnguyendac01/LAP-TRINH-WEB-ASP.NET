@@ -1,0 +1,51 @@
+﻿@model SV19T1021021.Web.Models.PaginationSearchResult
+@{
+    ViewBag.Title = "Khách hàng";
+}
+
+<form id="searchInput" action="~/customer/search" class="sidebar-form">
+    <div class="input-group">
+        @Html.HiddenFor(m => m.PageSize)
+        <input type="text" name="searchValue" class="form-control" placeholder="Nhập tên hoặc địa chỉ cần tìm " autofocus value="@Model.SearchValue">
+        <span class="input-group-btn">
+            <button type="submit" id="search-btn" class="btn btn-flat btn-info">
+                <i class="fa fa-search"></i>
+            </button>
+            <a href="~/customer/create" class="btn btn-flat btn-default" style="margin-left:5px">
+                Bổ sung
+            </a>
+        </span>
+    </div>
+</form>
+
+<div id="searchResult">
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/search.js"></script>
+    <script>
+        $(document).ready(function () {
+            doSearch(@Model.Page);
+            $("#searchInput").submit(function (e) {
+                e.preventDefault();
+                doSearch(1);
+                return false;
+            });
+        });
+        
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

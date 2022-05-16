@@ -1,0 +1,42 @@
+﻿@model SV19T1021021.Web.Models.PaginationSearchResult
+@{
+    ViewBag.Title = "Loại hàng";
+}
+
+<form id="searchInput" action="~/category/search">
+    <div class="input-group">
+        @Html.HiddenFor(m => m.PageSize)
+        <input type="text" name="searchValue"
+               class="form-control"
+               placeholder="Nhập tên loại hàng cần tìm"
+               value="@Model.SearchValue" />
+        <span class="input-group-btn">
+            <button type="submit" id="search-btn" class="btn btn-flat btn-info">
+                <i class="fa fa-search"></i>
+            </button>
+            <a href="~/category/create"
+               class="btn btn-flat btn-primary"
+               style="margin-left:5px;">
+                <i class="fa fa-plus"></i> Bổ sung
+            </a>
+        </span>
+    </div>
+</form>
+
+<div id="searchResult">
+
+</div>
+
+@section scripts{
+    <script src="~/scripts/search.js"></script>
+    <script>
+        $(document).ready(function () {
+            doSearch(@Model.Page);
+            $("#searchInput").submit(function (e) {
+                e.preventDefault();
+                doSearch(1);
+                return false;
+            });
+        });
+    </script>
+}

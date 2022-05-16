@@ -1,0 +1,89 @@
+﻿@model SV19T1021021.DomainModel.Customer
+@{
+    ViewBag.Title = "Bổ sung khách hàng";
+}
+
+
+<div class="container-fluid">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">&nbsp;</h3>
+        </div>
+        <form class="form-horizontal" action="~/customer/save" method="post">
+
+            @Html.HiddenFor(m => m.CustomerID)
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tên khách hàng</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @style = "color:#f00", })
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tên giao dịch</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.ContactName, "", new { @style = "color:#f00", })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Địa chỉ</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @style = "color:#f00", })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Quốc gia</label>
+                    <div class="col-sm-10">
+                       
+                            @Html.DropDownListFor(m => m.Country, SelectListHelper.Countries(), new { @class="form-control"})
+                            @Html.ValidationMessageFor(m=>m.Country,"", new { @style = "color:#f00" })
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Thành phố</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.City, new { @class = "form-control"})
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Mã bưu chính</label>
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control"})
+
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="form-group">
+                    @if  (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="col-sm-offset-2 col-sm-10 text-red" >
+                            @Html.ValidationSummary()
+                        </div>
+                    }
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-save"></i>Lưu dữ liệu
+                        </button>
+                        <a href="~/customer" class="btn btn-warning">
+                            <i class="fa fa-ban"></i>Hoàn tác
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

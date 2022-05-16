@@ -1,0 +1,69 @@
+﻿@model SV19T1021021.Web.Models.ProductPaginationResult
+@using System.Text.RegularExpressions
+@{
+    Layout = null;
+    var patern = new Regex(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*).*");
+}
+
+<p style="margin:10px 0 10px 0">
+    Có <strong>@Model.RowCount</strong> mặt hàng trong tổng số <strong>@Model.PageCount</strong> trang
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr class="bg-primary">
+                <th style="width:80px">Ảnh</th>
+                <th>Tên mặt hàng</th>
+                <th>Đơn vị tính</th>
+                <th>Giá</th>
+                <th style="width:120px">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.Data)
+            {
+                <tr>
+                    <td>
+                        @if (patern.IsMatch(i.Photo))
+                        {
+                            <img src="@i.Photo" style="width:80px" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/Products/@i.Photo" style="width:80px" />
+                        }
+                    </td>
+                    <td style="vertical-align:middle">@i.ProductName</td>
+                    <td style="vertical-align:middle">@i.Unit</td>
+                    <td style="vertical-align:middle">@i.Price</td>
+                    <td class="text-right" style="vertical-align:middle">
+                        <a href="~/product/edit/@i.ProductID" class="btn btn-xs btn-flat btn-info">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="~/product/delete/@i.ProductID" class="btn btn-xs btn-flat btn-danger">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<ul class="pagination">
+    @for (var i = 1; i <= Model.PageCount; ++i)
+    {
+        if (i == Model.Page)
+        {
+            <li class="active">
+                <a>@i</a>
+            </li>
+        }
+        else
+        {
+            <li><a href="javascript:;" onclick="doSearch(@i)">@i</a></li>
+        }
+    }
+</ul>

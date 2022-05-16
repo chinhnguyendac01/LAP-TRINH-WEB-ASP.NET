@@ -1,0 +1,75 @@
+﻿@model SV19T1021021.Web.Models.ProductPaginationSearchResult
+
+@{
+    ViewBag.Title = "Mặt hàng";
+
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border ">
+    </div>
+    <div class="box-body">
+        <form id="searchInput" action="~/product/search">
+            @Html.HiddenFor(m => m.PageSize)
+            <div class="row">
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new { @class = "form-control list" })
+                </div>
+
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.SupplierID, SelectListHelper.Suppliers(), new { @class = "form-control list" })
+                </div>
+
+                <div class="col-sm-6 input-group">
+                    <input type="text" name="searchValue"
+                           class="form-control"
+                           placeholder="Nhập tên mặt hàng cần tìm"
+                           value="@Model.SearchValue">
+                    <span class="input-group-btn">
+                        <button type="submit" id="search-btn" class="btn btn-flat btn-info">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <a href="~/product/create"
+                           class="btn btn-flat btn-primary"
+                           style="margin-left:5px;">
+                            <i class="fa fa-plus"></i> Bổ sung
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </form>
+        <button id="resetSearch" class="btn btn-group-sm btn-danger"><i class="fa fa-remove"></i>Xoá bộ tìm kiếm</button>
+
+        <div id="searchResult">
+
+        </div>
+
+    </div>
+
+    <div id="navi">
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/search.js"></script>
+    <script>
+        $(document).ready(function () {
+            doSearch(@Model.Page);
+            $("#resetSearch").click(function () {
+                clearForm();
+                doSearch(1);
+            })
+            $("#searchInput").submit(function (e) {
+                e.preventDefault();
+                doSearch(1);
+                return false;
+            });
+            $(".list").change(function () {
+                doSearch(1);
+                return false;
+            });
+        });
+    </script>
+}
+

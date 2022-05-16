@@ -1,0 +1,92 @@
+﻿
+@model SV19T1021021.DomainModel.Product
+@{
+    ViewBag.Title = "Bổ sung mặt hàng";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border ">
+    </div>
+
+    <div class="box-body">
+        <form class="form-horizontal" action="~/product/save" method="post" enctype="multipart/form-data">
+            @Html.HiddenFor(m => m.ProductID)
+            <div class="form-group">
+                <label class="control-label col-sm-2">Tên mặt hàng:</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", @autofocus = "", @value = $"{Model.ProductName}", @placeholder = "Nhập tên mặt hàng" })
+
+                    @Html.ValidationMessageFor(m => m.ProductName, "", new { @style = "color:#f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Loại hàng:</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new { @class = "form-control" })
+
+                    @*@Html.ValidationMessageFor(m => m.CategoryID, new { @style = "color:#f00" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Nhà cung cấp:</label>
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.SupplierID, SelectListHelper.Suppliers(), new { @class = "form-control" })
+
+                    @*@Html.ValidationMessageFor(m => m.SupplierID, new { @style = "color:#f00" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Đơn vị tính:</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Unit, new { @class = "form-control", @value = $"{Model.Unit}", @placeholder = "Nhập đơn vị tính" })
+
+                    @Html.ValidationMessageFor(m => m.Unit, "", new { @style = "color:#f00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Giá hàng:</label>
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @type = "number", @min = "0", @value = $"{Model.Price}", @onclick = "this.select()" })
+
+                    @*@Html.ValidationMessageFor(m => m.Price, new { @style = "color:#f00" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ảnh minh họa:</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" name="uploadPhoto" accept="image/*"
+                           onchange="document.getElementById('Photo').src = window.URL.createObjectURL(this.files[0])" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10">
+                    <input type="hidden" name="Photo" value="@Model.Photo" />
+                    <img id="Photo" src="~/Images/Products/@Model.Photo" class="img img-bordered" style="width:150px" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Lưu dữ liệu
+                    </button>
+                    <a class="btn btn-warning" href="~/product">
+                        <i class="fa fa-ban"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer text-center">
+    </div>
+
+</div>
+
+
+

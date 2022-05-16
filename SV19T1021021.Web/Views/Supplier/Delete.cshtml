@@ -1,0 +1,78 @@
+﻿@model SV19T1021021.DomainModel.Supplier
+@{
+    ViewBag.Title = "Xoá nhà cung cấp";
+}
+
+<div class="container-fluid">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">&nbsp;</h3>
+        </div>
+        <form class="form-horizontal" action="~/supplier/delete/@Model.SupplierID" method="POST">
+            <div class="box-body">
+                <div class="form-group" style="border-bottom: dotted 1px #808080">
+                    <label class="control-label col-sm-2">Tên nhà cung cấp</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.SupplierName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tên giao dịch</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.ContactName</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Số điện thoại</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.Phone</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Địa chỉ</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.Address</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Quốc gia</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.Country</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Thành phố</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.City</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Mã bưu chính</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">@Model.PostalCode</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        @if (ViewBag.InU)
+                        {
+                            <p class="text-danger">Không xoá được Nhà cung cấp  này do đã tồn tại đơn</p>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-remove"></i>Đồng ý xoá
+                            </button>
+                        }
+                        <a href="~/supplier" class="btn btn-default">
+                            <i class="fa fa-ban"></i>Hoàn tác
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
