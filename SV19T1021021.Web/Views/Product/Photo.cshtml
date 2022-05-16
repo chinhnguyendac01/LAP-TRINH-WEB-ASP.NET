@@ -1,0 +1,61 @@
+﻿
+@{
+
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border ">
+    </div>
+
+    <div class="box-body">
+        <form class="form-horizontal" action="#" method="post">
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Ảnh:</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" name="Photo" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10">
+                    <img src="~/Images/Products/Samsung_1.jpg" class="img img-bordered" style="width:150px" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Mô tả:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="Description" autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Thứ tự hiển thị:</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="DisplayOrder" autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-sm-10 checkbox">
+                    <label><input type="checkbox" name="IsHidden">Ẩn ảnh (không hiển thị với khách hàng)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Lưu dữ liệu
+                    </button>
+                    <a class="btn btn-warning" href="~/product/edit/123">
+                        <i class="fa fa-ban"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="box-footer text-center">
+    </div>
+
+</div>
